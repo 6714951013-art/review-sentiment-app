@@ -6,10 +6,7 @@ st.set_page_config(page_title="AI วิเคราะห์รีวิว", p
 st.title("📊 แอปวิเคราะห์อารมณ์จากรีวิวลูกค้า")
 st.write("ใส่ข้อความรีวิวของลูกค้าด้านล่าง แล้วให้ AI ช่วยวิเคราะห์ความรู้สึกและสรุปปัญหาให้ครับ")
 
-# ==========================================
-# ใส่ API Key ของคุณตรงนี้ (เอามาจากรูปภาพ)
-MY_API_KEY = "AIzaSyBXYQ_InvphYvwWziWGigvGnOqe05D-cUg"
-# ==========================================
+# ลบส่วนที่แปะรหัส API ตรงๆ ออกไปแล้ว เพื่อความปลอดภัย!
 
 # 2. ช่องให้ผู้ใช้พิมพ์/วางรีวิว
 review_text = st.text_area("✍️ วางข้อความรีวิวตรงนี้:", height=150)
@@ -20,8 +17,8 @@ if st.button("🚀 วิเคราะห์รีวิว", type="primary"):
         st.warning("⚠️ กรุณาใส่ข้อความรีวิวก่อนครับ")
     else:
         try:
-            # ตั้งค่า Gemini API ด้วย Key ที่ฝังไว้
-            genai.configure(api_key=MY_API_KEY)
+            # ตั้งค่า Gemini API โดยดึง Key จากหลังบ้านของ Streamlit (Secrets) แทน
+            genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
             model = genai.GenerativeModel('gemini-2.5-flash')
             
             # คำสั่ง (Prompt)
